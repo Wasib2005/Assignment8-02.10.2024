@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Banner = ({ book }) => {
   const { coverImage } = book;
   return (
-    <div className="flex justify-around items-center carousel-item w-full">
+    <div className="flex justify-around items-center carousel-item w-full animate-fade-left hover:animate-fade-right animate-once animate-duration-500 animate-delay-200">
       <div className="flex flex-col justify-center">
         <h1 className="text-2xl lg:text-3xl font-bold w-72">
           Books to freshen up your bookshelf

@@ -3,7 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 const Nav = () => {
   return (
     <div>
-      <div className="fixed w-full z-20">
+      <div className="fixed w-full z-[999]">
         <div>
           <div className="navbar  bg-base-100">
             <div className="navbar-start">

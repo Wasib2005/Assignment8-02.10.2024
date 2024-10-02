@@ -93,7 +93,7 @@ const Books = () => {
           Books
         </h1>
         <div className="flex  justify-around">
-          <div className="text-center absolute bg-slate-300 text-black rounded-2xl z-[100]  ">
+          <div className="text-center absolute bg-slate-300 text-black rounded-2xl z-[90]  ">
             <button
               onClick={() => setdetailsOn(!detailsOn)}
               className="flex text-white text-xl items-center btn bg-green-700 rounded-xl w-48 "

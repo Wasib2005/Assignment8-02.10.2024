@@ -10,7 +10,7 @@ const BookListType = ({
 }) => {
   return (
     <div className="relative">
-      <div className="flex bg-[#1d232a] mb-10 sticky top-[70px] z-50">
+      <div className="flex bg-[#1d232a] mb-10 sticky top-[72px] z-50">
         <p
           onClick={() => setIsWatchListBook(false)}
           className={` ${
@@ -36,6 +36,11 @@ const BookListType = ({
         </div>
         <div className=" border-b w-full "></div>
       </div>
+
+
+
+
+      
       <div className={`relative grid gap-10 ${isWatchListBook ? "hidden" : ""} `}>
         {books.map((book, i) => (
           <Book

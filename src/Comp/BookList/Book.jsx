@@ -3,7 +3,7 @@ import { CiLocationOn } from "react-icons/ci";
 import { IoBookOutline, IoPeopleOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 
-const Book = ({ book, addToWatchListBook, isWatchListBook, NO }) => {
+const Book = ({ book, addToWatchListBook, isWatchListBook }) => {
   const {
     name,
     author,
@@ -18,9 +18,7 @@ const Book = ({ book, addToWatchListBook, isWatchListBook, NO }) => {
   } = book;
   return (
     <div
-      className={`sticky z-[${
-        NO + 3
-      }] top-[120px] flex flex-col md:flex-row items-center gap-4 border rounded-2xl p-9 bg-[#1d232a] drop-shadow-2xl`}
+      className={` flex flex-col md:flex-row items-center gap-4 border rounded-2xl p-9 bg-[#1d232a] drop-shadow-2xl`}
     >
       <div className="border w-96 h-96 rounded-2xl flex justify-around items-center">
         <img width={"200px"} src={coverImage} alt="" />
