@@ -4,6 +4,7 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { Link, useLoaderData } from "react-router-dom";
 import BookListType from "../Comp/BookList/BookListType";
 import { saveToLS, takeFromLS } from "../CommonFile/LocalStorage";
+import { toast } from "react-toastify";
 
 const Books = () => {
   const booksData = useLoaderData();
@@ -28,6 +29,7 @@ const Books = () => {
     if (!isInWatchListObj) {
       setWatchListBookId([...watchListBookId, book.isbn13]);
       setWatchListBookObj([...watchListBookObj, book]);
+      toast.success(`${book.name} has been added in watchlist`)
     } else if (isWatchListBook) {
       setWatchListBookId((prevIds) =>
         prevIds.filter((element) => element !== book.isbn13)
@@ -35,8 +37,11 @@ const Books = () => {
       setWatchListBookObj((prevBooks) =>
         prevBooks.filter((element) => element.isbn13 !== book.isbn13)
       );
+      toast.warn(`${book.name} has been remove from watchlist`)
+
     } else {
-      console.log("add");
+      toast.error(`${book.name} has already added in watchlist`)
+
     }
   };
 

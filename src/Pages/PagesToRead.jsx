@@ -20,23 +20,6 @@ const PagesToRead = () => {
     );
   };
 
-  const renderCustomAxisTick = ({ x, y }) => {
-    let path = "";
-
-    return (
-      <svg
-        x={x - 12}
-        y={y + 4}
-        width={24}
-        height={24}
-        viewBox="0 0 1024 1024"
-        fill="#666"
-      >
-        <path d={path} />
-      </svg>
-    );
-  };
-
   const getPath = (x, y, width, height) =>
     `M${x},${y + height}
      C${x + width / 3},${y + height} ${x + width / 2},${y + height / 3} ${
@@ -81,9 +64,8 @@ const PagesToRead = () => {
       </h1>
       <div>
         <BarChart width={600} height={300} data={watchListBookObj}>
-          <XAxis dataKey="name" tick={renderCustomAxisTick} />
+          <XAxis dataKey="name" tick='name' />
           <YAxis />
-          {/* <Tooltip content={<CustomTooltip />} /> */}
           <Bar
             dataKey="totalPages"
             label={renderCustomBarLabel}

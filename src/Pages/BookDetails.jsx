@@ -34,7 +34,9 @@ function BookDetails() {
         <img className=" rounded-2xl" src={coverImage} alt={name} />
       </div>
       <div className="md:w-[55%] grid gap-1 md:gap-3">
-        <h1 className="text-2xl md:text-3xl lg:text-5xl font-bold text-black">{name}</h1>
+        <h1 className="text-2xl md:text-3xl lg:text-5xl font-bold text-black">
+          {name}
+        </h1>
         <p>By : {author}</p>
         <hr />
         <p className="flex gap-1">
@@ -52,6 +54,7 @@ function BookDetails() {
           </span>
         </p>
         <hr />
+
         <p>
           <span className="text-black  font-bold">Overview : </span> {overview}
         </p>
@@ -72,21 +75,37 @@ function BookDetails() {
           </span>
         </p>
         <hr />
-        <p>
-          Number of Pages :{" "}
-          <span className="text-black font-bold">{totalPages}</span>
-        </p>
-        <p>
-          Publisher : <span className="text-black font-bold">{publisher}</span>
-        </p>
-        <p>
-          Year of Publication :{" "}
-          <span className="text-black font-bold">{publicationYear}</span>
-        </p>
-        <p>
-          Ratings : <span className="text-black font-bold">{ratings}</span>
-        </p>
-        <div>
+        <div className=" flex justify-around">
+          <div className="grid gap-1">
+            <p>
+              Number of Pages :{" "}
+              <span className="text-black font-bold">{totalPages}</span>
+            </p>
+            <p>
+              Publisher :{" "}
+              <span className="text-black font-bold">{publisher}</span>
+            </p>
+            <p>
+              Year of Publication :{" "}
+              <span className="text-black font-bold">{publicationYear}</span>
+            </p>
+            <p>
+              Ratings : <span className="text-black font-bold">{ratings}</span>
+            </p>
+          </div>
+          <div className="grid gap-1">
+            <p>
+              Number Of Editions: <span className="font-bold text-black">{numberOfEditions}</span>
+            </p>
+            <p>
+            Language: <span className="font-bold text-black">{language}</span>
+            </p>
+            <p>
+            Isbn13: <span className="font-bold text-black">{isbn13}</span>
+            </p>
+          </div>
+        </div>
+        <div className="mt-3">
           <Link to={-1}>
             <button className="btn btn-outline btn-info">Go back</button>
           </Link>

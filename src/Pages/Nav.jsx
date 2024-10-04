@@ -60,7 +60,7 @@ const Nav = () => {
                         isActive ? " text-success border-2 border-success " : ""
                       }
                     >
-                      Listed Books
+                      Pages to Read
                     </NavLink>
                   </li>
                 </ul>
@@ -98,7 +98,7 @@ const Nav = () => {
                       isActive ? " text-success border-2 border-success " : ""
                     }
                   >
-                    Listed Books
+                    Pages To Read
                   </NavLink>
                 </li>
               </ul>
