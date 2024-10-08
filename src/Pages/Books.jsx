@@ -9,7 +9,7 @@ import Loader from "../Comp/Loader";
 
 const Books = () => {
   const booksData = useLoaderData();
-  const navigation = useNavigation()
+  const navigation = useNavigation();
 
   const [sortValue, setSortValue] = useState(1);
 
@@ -96,13 +96,10 @@ const Books = () => {
       setBooks(tempBook);
       setdetailsOn(false);
     }
-  }, [sortValue]);
+  }, [sortValue, books]);
 
-  
-  if (navigation.state === "loading"){
-    return(
-      <Loader/>
-    )
+  if (navigation.state === "loading") {
+    return <Loader />;
   }
   return (
     <div className="">

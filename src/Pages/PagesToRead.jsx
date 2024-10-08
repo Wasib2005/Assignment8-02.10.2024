@@ -1,24 +1,13 @@
 import { useEffect, useState } from "react";
 import { takeFromLS } from "../CommonFile/LocalStorage";
 import { useLoaderData } from "react-router-dom";
-import { Bar, BarChart, XAxis, YAxis } from "recharts";
+import { Bar, BarChart, Tooltip, XAxis, YAxis } from "recharts";
 
 const PagesToRead = () => {
   const books = useLoaderData();
   const [watchListBookId, setWatchListBookId] = useState([]);
   const [watchListBookObj, setWatchListBookObj] = useState([]);
 
-  const renderCustomBarLabel = ({ x, y, width, value }) => {
-    return (
-      <text
-        x={x + width / 2}
-        y={y}
-        fill="#666"
-        textAnchor="middle"
-        dy={-6}
-      >{`value: ${value}`}</text>
-    );
-  };
 
   const getPath = (x, y, width, height) =>
     `M${x},${y + height}
@@ -60,7 +49,7 @@ const PagesToRead = () => {
             : "hidden"
         }`}
       >
-        No book listed in your Wishlist
+        No book listed in your Watchlist
       </h1>
       <div>
         <BarChart width={600} height={300} data={watchListBookObj}>
@@ -68,8 +57,7 @@ const PagesToRead = () => {
           <YAxis />
           <Bar
             dataKey="totalPages"
-            label={renderCustomBarLabel}
-            fill="#8884d8"
+            fill="#2144d6"
             shape={<TriangleBar />}
           />
         </BarChart>
