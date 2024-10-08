@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import { GiCheckMark } from "react-icons/gi";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
-import { Link, useLoaderData } from "react-router-dom";
+import { Link, useLoaderData, useNavigation } from "react-router-dom";
 import BookListType from "../Comp/BookList/BookListType";
 import { saveToLS, takeFromLS } from "../CommonFile/LocalStorage";
 import { toast } from "react-toastify";
+import Loader from "../Comp/Loader";
 
 const Books = () => {
   const booksData = useLoaderData();
+  const navigation = useNavigation()
 
   const [sortValue, setSortValue] = useState(1);
 
@@ -18,34 +20,38 @@ const Books = () => {
   const [detailsOn, setdetailsOn] = useState(false);
   const [isWatchListBook, setIsWatchListBook] = useState(false);
   saveToLS("watchListBookId", watchListBookId);
+  const [readBookID, setReadBookID] = useState([]);
 
   const addToWatchListBook = (book, isWatchListBook) => {
-    const isInWatchListObj = watchListBookObj.some(
-      (element) => element.isbn13 === book.isbn13
-    );
-    if (isWatchListBook) {
-      localStorage.removeItem("watchListBookId");
-    }
-    if (!isInWatchListObj) {
-      setWatchListBookId([...watchListBookId, book.isbn13]);
-      setWatchListBookObj([...watchListBookObj, book]);
-      toast.success(`${book.name} has been added in wishlist`)
-    } else if (isWatchListBook) {
-      setWatchListBookId((prevIds) =>
-        prevIds.filter((element) => element !== book.isbn13)
-      );
-      setWatchListBookObj((prevBooks) =>
-        prevBooks.filter((element) => element.isbn13 !== book.isbn13)
-      );
-      toast.warn(`${book.name} has been remove from wishlist`)
-
+    if (readBookID.includes(book.isbn13)) {
+      toast.warn(`${book.name} in the Read Book List`);
     } else {
-      toast.error(`${book.name} has already added in wishlist`)
-
+      const isInWatchListObj = watchListBookObj.some(
+        (element) => element.isbn13 === book.isbn13
+      );
+      if (isWatchListBook) {
+        localStorage.removeItem("watchListBookId");
+      }
+      if (!isInWatchListObj) {
+        setWatchListBookId([...watchListBookId, book.isbn13]);
+        setWatchListBookObj([...watchListBookObj, book]);
+        toast.success(`${book.name} has been added in wishlist`);
+      } else if (isWatchListBook) {
+        setWatchListBookId((prevIds) =>
+          prevIds.filter((element) => element !== book.isbn13)
+        );
+        setWatchListBookObj((prevBooks) =>
+          prevBooks.filter((element) => element.isbn13 !== book.isbn13)
+        );
+        toast.warn(`${book.name} has been remove from wishlist`);
+      } else {
+        toast.error(`${book.name} has already added in wishlist`);
+      }
     }
   };
 
   useEffect(() => {
+    setReadBookID(takeFromLS("readBookID"));
     setWatchListBookId(takeFromLS("watchListBookId"));
   }, []);
 
@@ -91,6 +97,13 @@ const Books = () => {
       setdetailsOn(false);
     }
   }, [sortValue]);
+
+  
+  if (navigation.state === "loading"){
+    return(
+      <Loader/>
+    )
+  }
   return (
     <div className="">
       <div className="mb-28">

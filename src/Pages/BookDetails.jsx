@@ -73,7 +73,7 @@ function BookDetails() {
   }, []);
 
   return (
-    <div className="md:flex md:gap-10 items-center">
+    <div className="shadow-xl animate-flip-up  animate-once animate-duration-500 animate-delay-200 md:flex md:gap-10 items-center">
       <div>
         <img className=" rounded-2xl" src={coverImage} alt={name} />
       </div>

@@ -7,7 +7,7 @@ const HomeBook = ({ book }) => {
   return (
     <div>
       <Link to={`/book/${isbn13}`}>
-        <div className="card bg-base-100 w-72 lg:w-96 h-[26rem] shadow-xl animate-flip-up    hover:animate-bounce animate-once animate-duration-500 animate-delay-200">
+        <div className="card bg-base-100 w-72 lg:w-96 h-[26rem] shadow-xl animate-flip-up  animate-once animate-duration-500 animate-delay-200">
           <figure className="px-10 pt-10">
             <img
               src={coverImage}

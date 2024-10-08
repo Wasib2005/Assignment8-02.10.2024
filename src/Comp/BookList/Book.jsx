@@ -18,7 +18,7 @@ const Book = ({ book, addToWatchListBook, isWatchListBook }) => {
   } = book;
   return (
     <div
-      className={` flex flex-col md:flex-row items-center gap-4 border rounded-2xl p-9 bg-[#1d232a] drop-shadow-2xl`}
+      className={`shadow-xl animate-flip-up  animate-once animate-duration-500 animate-delay-200 flex flex-col md:flex-row items-center gap-4 border rounded-2xl p-9 bg-[#1d232a] drop-shadow-2xl`}
     >
       <div className="border w-96 h-96 rounded-2xl flex justify-around items-center">
         <img width={"200px"} src={coverImage} alt="" />
