@@ -4,21 +4,13 @@
 
 ## Made with react
 
-### [TailwindCSS](https://tailwindcss.com/
+### [TailwindCSS](https://tailwindcss.com/)
 
-)
+### [React Router](https://reactrouter.com/en/main)
 
-### [React Router](https://reactrouter.com/en/main
+### [Recharts](https://recharts.org/en-US)
 
-)
-
-### [Recharts](https://recharts.org/en-US
-
-)
-
-### [TailwindCSS Animated](https://github.com/new-data-services/tailwindcss-animated
-
-)
+### [TailwindCSS Animated](https://github.com/new-data-services/tailwindcss-animated)
 
 ### [React Spinners](https://mhnpd.github.io/react-loader-spinner/)
 
