@@ -28,7 +28,7 @@ const BookListType = ({
           } rounded-t-xl p-2 `}
         >
           <p onClick={() => setIsWatchListBook(true)} className="w-[140px]">
-            Watchlist Books
+            Wishlist Books
             <sup className="bg-slate-500 w-6 p-1 rounded-full">
               {watchListBookObj.length}
             </sup>

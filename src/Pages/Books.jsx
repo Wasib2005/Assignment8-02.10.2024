@@ -29,7 +29,7 @@ const Books = () => {
     if (!isInWatchListObj) {
       setWatchListBookId([...watchListBookId, book.isbn13]);
       setWatchListBookObj([...watchListBookObj, book]);
-      toast.success(`${book.name} has been added in watchlist`)
+      toast.success(`${book.name} has been added in wishlist`)
     } else if (isWatchListBook) {
       setWatchListBookId((prevIds) =>
         prevIds.filter((element) => element !== book.isbn13)
@@ -37,10 +37,10 @@ const Books = () => {
       setWatchListBookObj((prevBooks) =>
         prevBooks.filter((element) => element.isbn13 !== book.isbn13)
       );
-      toast.warn(`${book.name} has been remove from watchlist`)
+      toast.warn(`${book.name} has been remove from wishlist`)
 
     } else {
-      toast.error(`${book.name} has already added in watchlist`)
+      toast.error(`${book.name} has already added in wishlist`)
 
     }
   };

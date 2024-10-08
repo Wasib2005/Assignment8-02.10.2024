@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { takeFromLS } from "../CommonFile/LocalStorage";
 import { useLoaderData } from "react-router-dom";
-import { Bar, BarChart, Tooltip, XAxis, YAxis } from "recharts";
+import { Bar, BarChart, XAxis, YAxis } from "recharts";
 
 const PagesToRead = () => {
   const books = useLoaderData();
@@ -60,7 +60,7 @@ const PagesToRead = () => {
             : "hidden"
         }`}
       >
-        No book listed in your Watchlist
+        No book listed in your Wishlist
       </h1>
       <div>
         <BarChart width={600} height={300} data={watchListBookObj}>

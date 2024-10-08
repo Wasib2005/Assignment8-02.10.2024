@@ -1,5 +1,7 @@
 import { Link, useLoaderData, useParams } from "react-router-dom";
-import { saveToLS } from "../CommonFile/LocalStorage";
+import { saveToLS, takeFromLS } from "../CommonFile/LocalStorage";
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 function BookDetails() {
   const { bookId } = useParams();
@@ -13,7 +15,6 @@ function BookDetails() {
     author,
     tags,
     ratings,
-    reviews,
     totalPages,
     publicationYear,
     publisher,
@@ -21,12 +22,55 @@ function BookDetails() {
     coverImage,
     language,
     genre,
-    publicationDate,
     summary,
     isbn13,
     numberOfEditions,
-    awards,
   } = book;
+
+  const [watchListBookId, setWatchListBookId] = useState([]);
+  const [readBookID, setReadBookID] = useState([]);
+
+  const WishlistBtnHandle = () => {
+    if (!watchListBookId.includes(isbn13) && !readBookID.includes(isbn13)) {
+      const tempWatchList = [...watchListBookId, isbn13];
+      setWatchListBookId(tempWatchList);
+      saveToLS("watchListBookId", tempWatchList);
+      toast.success(`${name} has been added in wishlist`);
+    } else if (readBookID.includes(isbn13)) {
+      toast.warn(`${name} has been Already added in Read Books List`);
+    } else if (watchListBookId.includes(isbn13)) {
+      toast.error(`${name} has been Already added in wishlist`);
+    }
+  };
+  const ReadBtnHandle = () => {
+    if (!readBookID.includes(isbn13)) {
+      // Book not in list, add it
+      const tempReadList = [...readBookID, isbn13];
+      setReadBookID(tempReadList);
+      saveToLS("readBookID", tempReadList);
+      toast.success(`${name} has been added to the Read Books List`);
+      const tempWishList = watchListBookId.filter((id) => id !== isbn13);
+      setWatchListBookId(tempWishList);
+      saveToLS("watchListBookId", tempWishList);
+      if (tempWishList.length===0){
+        localStorage.removeItem("watchListBookId")
+      }
+    } else {
+      // Book is in the list, remove it
+      const tempReadList = readBookID.filter((id) => id !== isbn13);
+      setReadBookID(tempReadList);
+      saveToLS("readBookID", tempReadList);
+      toast.error(`${name} has been removed from the Read Books List`);
+      if (tempReadList.length === 0) {
+        localStorage.removeItem("readBookID");
+      }
+    }
+  };
+
+  useEffect(() => {
+    setWatchListBookId(takeFromLS("watchListBookId"));
+    setReadBookID(takeFromLS("readBookID"));
+  }, []);
 
   return (
     <div className="md:flex md:gap-10 items-center">
@@ -95,19 +139,32 @@ function BookDetails() {
           </div>
           <div className="grid gap-1">
             <p>
-              Number Of Editions: <span className="font-bold text-black">{numberOfEditions}</span>
+              Number Of Editions:{" "}
+              <span className="font-bold text-black">{numberOfEditions}</span>
             </p>
             <p>
-            Language: <span className="font-bold text-black">{language}</span>
+              Language: <span className="font-bold text-black">{language}</span>
             </p>
             <p>
-            Isbn13: <span className="font-bold text-black">{isbn13}</span>
+              Isbn13: <span className="font-bold text-black">{isbn13}</span>
             </p>
           </div>
         </div>
-        <div className="mt-3">
+        <div className="mt-3 flex gap-2">
           <Link to={-1}>
             <button className="btn btn-outline btn-info">Go back</button>
+          </Link>
+          <Link onClick={() => ReadBtnHandle()}>
+            <button
+              className={`btn btn-outline ${
+                readBookID.includes(isbn13) ? "btn-error" : "btn-success"
+              }`}
+            >
+              {readBookID.includes(isbn13) ? "Unread" : "Read"}
+            </button>
+          </Link>
+          <Link onClick={() => WishlistBtnHandle()}>
+            <button className="btn  btn-info text-white">Wishlist</button>
           </Link>
         </div>
       </div>
