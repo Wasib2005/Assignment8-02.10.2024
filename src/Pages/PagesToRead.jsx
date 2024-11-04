@@ -55,7 +55,7 @@ const PagesToRead = () => {
   }, [watchListBookObj]);
 
   return (
-    <div className="flex justify-center h-[100vh] border items-center">
+    <div className="flex sm:flex-col justify-center h-[100vh] border items-center">
       <div className="flex flex-col justify-center items-center">
         <PieChart
           series={[
