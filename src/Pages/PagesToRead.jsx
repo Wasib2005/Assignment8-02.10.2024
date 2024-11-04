@@ -1,67 +1,62 @@
-import { useEffect, useState } from "react";
-import { takeFromLS } from "../CommonFile/LocalStorage";
+import React, { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
-import { Bar, BarChart, Tooltip, XAxis, YAxis } from "recharts";
+import { takeFromLS } from "../CommonFile/LocalStorage";
+import { PieChart } from "@mui/x-charts";
 
 const PagesToRead = () => {
   const books = useLoaderData();
-  const [watchListBookId, setWatchListBookId] = useState([]);
-  const [watchListBookObj, setWatchListBookObj] = useState([]);
-
-
-  const getPath = (x, y, width, height) =>
-    `M${x},${y + height}
-     C${x + width / 3},${y + height} ${x + width / 2},${y + height / 3} ${
-      x + width / 2
-    }, ${y}
-     C${x + width / 2},${y + height / 3} ${x + (2 * width) / 3},${y + height} ${
-      x + width
-    }, ${y + height}
-     Z`;
-
-  const TriangleBar = (props) => {
-    const { fill, x, y, width, height } = props;
-
-    return <path d={getPath(x, y, width, height)} stroke="none" fill={fill} />;
-  };
+  const [readListBookId, setReadListBookId] = useState([]);
+  const [readListBookObj, setReadListBookObj] = useState([]);
+  const [chartReadListBookObj, setChartReadListBookObj] = useState([]);
 
   useEffect(() => {
-    setWatchListBookId(takeFromLS("watchListBookId"));
+    setReadListBookId(takeFromLS("readBookID"));
   }, []);
 
   useEffect(() => {
-    const storedWatchList = takeFromLS("watchListBookId");
-    if (storedWatchList) {
-      setWatchListBookId(storedWatchList);
+    const storedReadList = takeFromLS("readBookID");
+    if (storedReadList) {
+      setReadListBookId(storedReadList);
       const tempBooks = books.filter((book) =>
-        storedWatchList.includes(book.isbn13)
+        storedReadList.includes(book.isbn13)
       );
-      setWatchListBookObj(tempBooks);
+      setReadListBookObj(tempBooks);
     }
   }, []);
 
+  useEffect(() => {
+    setChartReadListBookObj(
+      readListBookObj.map((book, index) => ({
+        id: index,
+        label: book.name,
+        value: book.totalPages,
+      }))
+    );
+  }, [readListBookObj]);
+
+  console.log(chartReadListBookObj);
+
   return (
-    <div className="grid justify-center mt-20">
-      <h1
-        className={`text-center text-2xl font-bold mb-16  ${
-          watchListBookId.length === 1 && watchListBookId.includes(null)
-            ? ""
-            : "hidden"
-        }`}
-      >
-        No book listed in your Watchlist
-      </h1>
-      <div>
-        <BarChart width={600} height={300} data={watchListBookObj}>
-          <XAxis dataKey="name" tick='name' />
-          <YAxis />
-          <Bar
-            dataKey="totalPages"
-            fill="#2144d6"
-            shape={<TriangleBar />}
-          />
-        </BarChart>
-      </div>
+    <div className="flex justify-center h-[100vh] border items-center">
+      <PieChart
+        series={[
+          {
+            data: chartReadListBookObj,
+            innerRadius: 80,
+            outerRadius: 150,
+            paddingAngle: 1,
+            cornerRadius: 5,
+            startAngle: 0,
+            endAngle: 360,
+            cx: 150,
+            cy: 150,
+            faded: { innerRadius: 30, additionalRadius: -30, color: "gray" },
+            highlightScope: { fade: 'global', highlight: 'item' },
+          },
+        ]}
+        width={400}
+        height={400}
+      />
     </div>
   );
 };
