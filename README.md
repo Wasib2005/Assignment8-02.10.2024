@@ -11,7 +11,7 @@
 
 ### [React Router](https://reactrouter.com/en/main)
 
-### [Recharts](https://recharts.org/en-US)
+### [MUI X Charts](https://mui.com/x/react-charts/)
 
 ### [TailwindCSS Animated](https://github.com/new-data-services/tailwindcss-animated)
 
